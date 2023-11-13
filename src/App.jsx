@@ -1,9 +1,16 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 import "./App.css";
+import JournalEntries from "./Journal";
+import NewEntry from "./NewEntry";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <NewEntry />
+      <JournalEntries />
+    </>
+  );
 }
 
 export default App;
