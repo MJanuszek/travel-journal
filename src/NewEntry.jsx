@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 
-const temporaryPlaceForEntries = [];
-
 function NewEnry() {
-  // const [photo, setPhoto] = useState();
-  // const [placeName, setPlaceName] = useState();
   const [newEntry, setNewEntry] = useState({
     name: "",
     date: "",
@@ -14,6 +10,9 @@ function NewEnry() {
     e.preventDefault();
     console.log(newEntry);
   }
+
+  // todo: send data from newEntry to DB, then display them in Journal component
+  // todo: how to save in state photo from input ?
   return (
     <>
       <h3>Add new entry to your journal</h3>
