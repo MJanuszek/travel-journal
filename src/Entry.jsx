@@ -1,4 +1,4 @@
-import "./Entry.css";
+import "./entry.css";
 
 function Entry({ name, description, photo }) {
   return (

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Entry from "./Entry";
+import "./journal.css";
 
 const startEntries = [
   {
@@ -11,7 +12,7 @@ const startEntries = [
   },
   {
     name: "Okayama",
-    date: "12.12.2012",
+    date: "12.11.2012",
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et quaerat error sit vel in similique perferendis velit, porro ex cum! Dolore ducimus animi qui, quas nulla voluptas asperiores reiciendis veritatis",
     photo: null,
@@ -27,22 +28,30 @@ const startEntries = [
 
 function JournalEntries() {
   // const [allEntries, setDisplayAll] = useState();
+  let selectedDate = "12.12.2012";
   return (
-    <>
-      <h2>All previous entries:</h2>
+    <div className="jurnal-day-page">
+      <div className="journal-page-title">
+        <button>Previous date</button>
+        <h2>{selectedDate}</h2>
+        <button>Next date</button>
+      </div>
+
       <ul>
-        {startEntries.map((entry, index) => {
-          return (
-            <Entry
-              key={index}
-              name={entry.name}
-              description={entry.description}
-              date={entry.date}
-            />
-          );
-        })}
+        {startEntries
+          .filter((entry) => entry.date === selectedDate)
+          .map((entry, index) => {
+            return (
+              <Entry
+                key={index}
+                name={entry.name}
+                description={entry.description}
+                date={entry.date}
+              />
+            );
+          })}
       </ul>
-    </>
+    </div>
   );
 }
 

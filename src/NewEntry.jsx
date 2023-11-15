@@ -4,6 +4,7 @@ function NewEnry() {
   const [newEntry, setNewEntry] = useState({
     name: "",
     date: "",
+    description: "",
     photo: null,
   });
   function handleAddNewEntry(e) {
@@ -36,6 +37,16 @@ function NewEnry() {
             setNewEntry((prevEntry) => ({
               ...prevEntry,
               name: e.target.value,
+            }));
+          }}
+        />
+        <input
+          type="textarea"
+          placeholder="write your memories..."
+          onChange={(e) => {
+            setNewEntry((prevEntry) => ({
+              ...prevEntry,
+              description: e.target.value,
             }));
           }}
         />
