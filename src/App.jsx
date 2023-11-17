@@ -4,6 +4,7 @@ import "./App.css";
 import JournalEntries from "./Journal";
 import NewEntry from "./NewEntry";
 import Header from "./Header";
+import ShowGooleMap from "./ShowGoogleMap";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <NewEntry />
       <JournalEntries />
+      <ShowGooleMap />
     </>
   );
 }
