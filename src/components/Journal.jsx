@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Entry from "./Entry";
-import "./journal.css";
+import "../styles/journal.css";
 
 const startEntries = [
   {

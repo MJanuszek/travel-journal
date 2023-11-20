@@ -1,6 +1,8 @@
 // import { useState } from "react";
+// maps api tutorial: https://www.youtube.com/watch?v=iP3DnhCUIsE
+// firebase tutoriaL:  https://www.youtube.com/watch?v=2hR-uWjBAgw
 
-import "./App.css";
+import "../styles/App.css";
 import JournalEntries from "./Journal";
 import NewEntry from "./NewEntry";
 import Header from "./Header";
