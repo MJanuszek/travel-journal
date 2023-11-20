@@ -59,7 +59,9 @@ function NewEnry() {
           style={{ border: "1px solid black" }}
         />
         <hr />
-        <button onClick={handleAddNewEntry}>Add new memory</button>
+        <button className="btn" onClick={handleAddNewEntry}>
+          Add new memory
+        </button>
       </form>
     </>
   );

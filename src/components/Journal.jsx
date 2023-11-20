@@ -32,9 +32,9 @@ function JournalEntries() {
   return (
     <div className="jurnal-day-page">
       <div className="journal-page-title">
-        <button>Previous date</button>
+        <button className="btn">Previous date</button>
         <h2>{selectedDate}</h2>
-        <button>Next date</button>
+        <button className="btn">Next date</button>
       </div>
 
       <ul>
