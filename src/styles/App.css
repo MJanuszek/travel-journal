@@ -3,13 +3,20 @@ body {
 }
 
 .btn {
-  height: 100px;
-  width: 200px;
-  padding: 20px;
+  height: 70px;
+  width: 250px;
+  padding: 10px;
   font-size: 25px;
   border-radius: 20px;
+  margin: 10px;
 }
 
 .btn:hover {
   background-color: rgb(23, 175, 192);
+}
+
+input {
+  font-size: 25px;
+  padding: 15px;
+  margin: 10px;
 }

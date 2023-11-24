@@ -8,11 +8,13 @@ import JournalEntries from "./Journal";
 import NewEntry from "./NewEntry";
 import Header from "./Header";
 import ShowGooleMap from "./ShowGoogleMap";
+import { Auth } from "./Auth";
 
 function App() {
   return (
     <>
       <Header />
+      <Auth />
       <NewEntry />
       <JournalEntries />
       <ShowGooleMap />
