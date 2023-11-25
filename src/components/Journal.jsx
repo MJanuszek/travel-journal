@@ -12,22 +12,13 @@ function JournalEntries() {
   const journalEntriesRef = collection(database, "journal-entries");
   //  get journal entries from database and set them as state:
 
-  const getJournalEntries = async () => {
-    try {
-      const data = await getDocs(journalEntriesRef);
-      const filterData = data.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
-      });
-      console.log(filterData);
-      setDisplayAll(filterData);
-      // getJournalEntries();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   useEffect(() => {
-    getJournalEntries();
+    const unsubscribe = onSnapshot(journalEntriesRef, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setDisplayAll(data);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   return (
