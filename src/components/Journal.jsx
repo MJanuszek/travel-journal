@@ -3,18 +3,34 @@ import Entry from "./Entry";
 import "../styles/journal.css";
 import { auth } from "../config/firebase";
 import { database } from "../config/firebase";
-import { getDocs, collection, onSnapshot } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  onSnapshot,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 
 function JournalEntries() {
   const [allEntries, setDisplayAll] = useState([]);
-  // let selectedDate = "12.12.2012";
-
+  // collection: method that gives references to the collection from firebase
   const journalEntriesRef = collection(database, "journal-entries");
-  //  get journal entries from database and set them as state:
 
+  // DELATE::
+  // this function will be passed as props to Entry component:
+  async function deleteEntry(id) {
+    console.log("id of entry to delete:", id);
+    // need to pass the id of chosen entry to delete:
+    const entryDel = doc(database, "journal-entries", id);
+    await deleteDoc(entryDel);
+  }
+
+  // SET STATE AND DISPLAY CHANGES (by onSnapshot)::
   useEffect(() => {
+    // onSnapshot checks changes in database collection, and refreshes view if needed;
     const unsubscribe = onSnapshot(journalEntriesRef, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      //  get journal entries from database and set them as state:
       setDisplayAll(data);
     });
 
@@ -37,6 +53,7 @@ function JournalEntries() {
               name={entry.Name}
               description={entry.Description}
               date={entry.Date}
+              handleDelete={() => deleteEntry(entry.id)}
             />
           );
         })}

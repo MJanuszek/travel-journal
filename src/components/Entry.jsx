@@ -1,6 +1,6 @@
 import "../styles/entry.css";
 
-function Entry({ name, description, date, photo }) {
+function Entry({ name, description, date, handleDelete, photo }) {
   return (
     <div className="single-entry">
       <div className="entry">
@@ -9,6 +9,9 @@ function Entry({ name, description, date, photo }) {
         <div className="entry-date">{date}</div>
       </div>
       <div className="entry-photo">photo</div>
+      <button className="btn" onClick={handleDelete}>
+        Delete this entry
+      </button>
     </div>
   );
 }
