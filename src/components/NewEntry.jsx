@@ -1,18 +1,30 @@
 import { useState, useEffect } from "react";
+import { addDoc } from "firebase/firestore";
+import { database } from "../config/firebase";
+import { getDocs, collection } from "firebase/firestore";
 
 function NewEnry() {
+  const journalEntriesRef = collection(database, "journal-entries");
   const [newEntry, setNewEntry] = useState({
     name: "",
-    date: "",
+    date: 0,
     description: "",
     photo: null,
   });
-  function handleAddNewEntry(e) {
+  async function handleAddNewEntry(e) {
     e.preventDefault();
     console.log(newEntry);
+    try {
+      await addDoc(journalEntriesRef, {
+        Name: newEntry.name,
+        Date: newEntry.date,
+        Description: newEntry.description,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
-  // todo: send data from newEntry to DB, then display them in Journal component
   // todo: how to save in state photo from input ?
   return (
     <>
@@ -25,7 +37,7 @@ function NewEnry() {
           onChange={(e) => {
             setNewEntry((prevEntry) => ({
               ...prevEntry,
-              date: e.target.value,
+              date: Number(e.target.value),
             }));
           }}
         />

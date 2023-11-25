@@ -1,5 +1,5 @@
 import { auth } from "../config/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { useState } from "react";
 
 export function Auth() {
@@ -8,9 +8,23 @@ export function Auth() {
 
   //   loging in
   const signIntoJoural = async () => {
-    await createUserWithEmailAndPassword(auth, email, password);
-    // after entering mail and password, new user is created on: https://console.firebase.google.com/project/travel-journal-project-405412/authentication/users
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      // after entering mail and password, new user is created on: https://console.firebase.google.com/project/travel-journal-project-405412/authentication/users
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  const logOut = async () => {
+    try {
+      await signOut(auth);
+      console.log("logged out of journal");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div>
       <h3>Log into your journal:</h3>
@@ -26,6 +40,9 @@ export function Auth() {
       />
       <button className="btn" onClick={signIntoJoural}>
         Enter
+      </button>
+      <button className="btn" onClick={logOut}>
+        Logout
       </button>
     </div>
   );
