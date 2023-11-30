@@ -10,6 +10,9 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
+// library to analyze photo metadata and retrieve geolocation information:::
+import ExifReader from "exif-js";
+import img from "../assets/IMG_20220710_091504.jpg";
 
 function JournalEntries() {
   const [allEntries, setDisplayAll] = useState([]);
@@ -23,6 +26,10 @@ function JournalEntries() {
     // need to pass the id of chosen entry to delete:
     const entryDel = doc(database, "journal-entries", id);
     await deleteDoc(entryDel);
+  }
+  // GET DIRECTIONS:::
+  function getDirectionsForGoogleMaps(id) {
+    console.log("id of entry where is clicked photo:", id);
   }
 
   // SET STATE AND DISPLAY CHANGES (by onSnapshot)::
@@ -39,13 +46,8 @@ function JournalEntries() {
 
   return (
     <div className="jurnal-day-page">
-      <div className="journal-page-title">
-        <button className="btn">Previous date</button>
-        {/* <h2>{selectedDate}</h2> */}
-        <button className="btn">Next date</button>
-      </div>
+      <h3>All memories:</h3>
       <ul>
-        {/*  .filter((entry) => entry.date === selectedDate) */}
         {allEntries.map((entry, index) => {
           return (
             <Entry
@@ -53,11 +55,22 @@ function JournalEntries() {
               name={entry.Name}
               description={entry.Description}
               date={entry.Date}
+              photo="photo here"
               handleDelete={() => deleteEntry(entry.id)}
+              getDirectionsForGoogleMaps={() =>
+                getDirectionsForGoogleMaps(entry.id)
+              }
             />
           );
         })}
       </ul>
+      {/* delate below later::::: */}
+      <div
+        className="entry-photo"
+        style={{ backgroundImage: `url(${img})`, backgroundSize: "cover" }}
+      >
+        test photo
+      </div>
     </div>
   );
 }

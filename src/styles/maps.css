@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+.maps-wrapper {
+  background-color: white;
+  border-radius: 16px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4vh;
+}

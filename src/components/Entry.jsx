@@ -1,6 +1,13 @@
 import "../styles/entry.css";
 
-function Entry({ name, description, date, handleDelete, photo }) {
+function Entry({
+  name,
+  description,
+  date,
+  getDirectionsForGoogleMaps,
+  handleDelete,
+  photo,
+}) {
   return (
     <div className="single-entry">
       <div className="entry">
@@ -8,7 +15,9 @@ function Entry({ name, description, date, handleDelete, photo }) {
         <div className="entry-description">{description}</div>
         <div className="entry-date">{date}</div>
       </div>
-      <div className="entry-photo">photo</div>
+      <div className="entry-photo" onClick={getDirectionsForGoogleMaps}>
+        {photo}
+      </div>
       <button className="btn" onClick={handleDelete}>
         Delete this entry
       </button>

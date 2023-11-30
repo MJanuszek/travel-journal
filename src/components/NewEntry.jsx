@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { addDoc } from "firebase/firestore";
-import { database } from "../config/firebase";
+import { database, auth } from "../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
 
 function NewEnry() {
@@ -9,8 +9,8 @@ function NewEnry() {
     name: "",
     date: 0,
     description: "",
-    photo: null,
   });
+  const [photo, setPhoto] = useState(null);
   async function handleAddNewEntry(e) {
     e.preventDefault();
     console.log(newEntry);
@@ -19,6 +19,8 @@ function NewEnry() {
         Name: newEntry.name,
         Date: newEntry.date,
         Description: newEntry.description,
+
+        // userId: auth?.currentUser?.uid,
       });
     } catch (err) {
       console.error(err);
@@ -69,6 +71,9 @@ function NewEnry() {
           name=""
           id="trip-photo"
           style={{ border: "1px solid black" }}
+          onChange={(e) => {
+            setPhoto(e.target.value);
+          }}
         />
         <hr />
         <button className="btn" onClick={handleAddNewEntry}>
