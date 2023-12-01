@@ -16,7 +16,11 @@ function Entry({
         <div className="entry-date">{date}</div>
       </div>
       <div className="entry-photo" onClick={getDirectionsForGoogleMaps}>
-        {photo}
+        <img
+          src={photo}
+          alt="Base64 Image"
+          style={{ maxWidth: "100%", maxHeight: "300px" }}
+        />
       </div>
       <button className="btn" onClick={handleDelete}>
         Delete this entry

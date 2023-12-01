@@ -4,7 +4,7 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 // useJsApiLoader = hook from maps
 import { API_KEY } from "../constants";
 
-let photoClicked = img;
+// let photoClicked = img;
 
 const center = { lat: 53.33333, lng: 2.4444 };
 const containerStyle = {

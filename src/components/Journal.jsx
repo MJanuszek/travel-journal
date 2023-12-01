@@ -30,6 +30,12 @@ function JournalEntries() {
   // GET DIRECTIONS:::
   function getDirectionsForGoogleMaps(id) {
     console.log("id of entry where is clicked photo:", id);
+    // let file = img;
+    // ExifReader.load(file, (exifData) => {
+    //   const { GPSLatitude, GPSLongitude } = exifData.gps;
+    //   console.log(GPSLatitude, GPSLongitude);
+    //   return { GPSLatitude, GPSLongitude };
+    // });
   }
 
   // SET STATE AND DISPLAY CHANGES (by onSnapshot)::
@@ -55,7 +61,7 @@ function JournalEntries() {
               name={entry.Name}
               description={entry.Description}
               date={entry.Date}
-              photo="photo here"
+              photo={entry.Photo}
               handleDelete={() => deleteEntry(entry.id)}
               getDirectionsForGoogleMaps={() =>
                 getDirectionsForGoogleMaps(entry.id)
@@ -67,6 +73,7 @@ function JournalEntries() {
       {/* delate below later::::: */}
       <div
         className="entry-photo"
+        onClick={getDirectionsForGoogleMaps}
         style={{ backgroundImage: `url(${img})`, backgroundSize: "cover" }}
       >
         test photo

@@ -10,7 +10,10 @@ function NewEnry() {
     date: 0,
     description: "",
   });
-  const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState({
+    file: null,
+    base64: "",
+  });
   async function handleAddNewEntry(e) {
     e.preventDefault();
     console.log(newEntry);
@@ -19,6 +22,7 @@ function NewEnry() {
         Name: newEntry.name,
         Date: newEntry.date,
         Description: newEntry.description,
+        Photo: photo.base64,
 
         // userId: auth?.currentUser?.uid,
       });
@@ -26,8 +30,22 @@ function NewEnry() {
       console.error(err);
     }
   }
-
   // todo: how to save in state photo from input ?
+  function handleChangePhotoToString(e) {
+    let toPhotoConvert = e.target.files[0];
+    if (toPhotoConvert) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhoto({
+          file: toPhotoConvert,
+          base64: reader.result,
+        });
+      };
+
+      reader.readAsDataURL(toPhotoConvert);
+    }
+  }
+  //
   return (
     <>
       <h3>Add new entry to your journal</h3>
@@ -71,9 +89,7 @@ function NewEnry() {
           name=""
           id="trip-photo"
           style={{ border: "1px solid black" }}
-          onChange={(e) => {
-            setPhoto(e.target.value);
-          }}
+          onChange={handleChangePhotoToString}
         />
         <hr />
         <button className="btn" onClick={handleAddNewEntry}>
