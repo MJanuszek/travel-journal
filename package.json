@@ -12,6 +12,8 @@
   "dependencies": {
     "@react-google-maps/api": "^2.19.2",
     "exif-js": "^2.3.0",
+    "exif-reader": "^2.0.0",
+    "exifreader": "^4.17.0",
     "firebase": "^10.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

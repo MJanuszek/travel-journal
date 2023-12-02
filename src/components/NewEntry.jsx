@@ -3,18 +3,8 @@ import { addDoc } from "firebase/firestore";
 import { database, auth } from "../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
 // library to analyze photo metadata and retrieve geolocation information:::
-import ExifReader from "exif-js";
-import img from "../assets/IMG_20220710_091504.jpg";
-// GET DIRECTIONS:::
-function getDirectionsForGoogleMaps(id) {
-  console.log("id of entry where is clicked photo:", id);
-  // let file = img;
-  // ExifReader.load(file, (exifData) => {
-  //   const { GPSLatitude, GPSLongitude } = exifData.gps;
-  //   console.log(GPSLatitude, GPSLongitude);
-  //   return { GPSLatitude, GPSLongitude };
-  // });
-}
+import ExifReader from "exifreader";
+// https://www.npmjs.com/package/exifreader#usage
 
 function NewEnry() {
   const journalEntriesRef = collection(database, "journal-entries");
@@ -27,8 +17,21 @@ function NewEnry() {
     file: null,
     base64: "",
   });
+  // GET DIRECTIONS:::
+  function getGPSDataFromPhoto(file) {
+    let photoGPSData = ExifReader.load(file).then((data) => {
+      let latitude = data.GPSLatitude.description;
+      let longitude = data.GPSLongitude.description;
+      console.log(latitude, longitude);
+      return { latitude, longitude };
+    });
+    return photoGPSData;
+  }
+
   async function handleAddNewEntry(e) {
     e.preventDefault();
+    let photoGPSData = await getGPSDataFromPhoto(photo.file);
+    console.log(photoGPSData);
     console.log(newEntry);
     try {
       await addDoc(journalEntriesRef, {
@@ -36,6 +39,8 @@ function NewEnry() {
         Date: newEntry.date,
         Description: newEntry.description,
         Photo: photo.base64,
+        Latitude: photoGPSData.latitude,
+        Longitude: photoGPSData.longitude,
 
         // userId: auth?.currentUser?.uid,
       });

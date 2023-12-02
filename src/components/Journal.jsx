@@ -11,9 +11,6 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-// library to analyze photo metadata and retrieve geolocation information:::
-import ExifReader from "exif-js";
-import img from "../assets/IMG_20220710_091504.jpg";
 
 function JournalEntries() {
   const [allEntries, setDisplayAll] = useState([]);
@@ -30,10 +27,9 @@ function JournalEntries() {
   }
   // GET DIRECTIONS:::
   function getDirectionsForGoogleMaps(id) {
-    console.log("id of entry where is clicked photo:", id);
-    let lat = 10.111;
-    let log = 10.111;
-    return <ShowGooleMap lat={lat} log={log} onDoSth={handleDoSth} />;
+    console.log("id of entry where photo is clicked :", id);
+    let latitude = 40.111;
+    let longitude = 30.111;
   }
 
   // SET STATE AND DISPLAY CHANGES (by onSnapshot)::

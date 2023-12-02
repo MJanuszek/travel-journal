@@ -30,7 +30,6 @@ const ShowGooleMap = ({ latitude, longitude }) => {
     // if <GoogleMap/> component
     if (mapRef.current) {
       const newPosition = { lat: latitude, lng: longitude };
-      // const newPosition = { lat: 51.234, lng: 21.234 };
       setPhotoMarker(newPosition);
     }
   };
