@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Entry from "./Entry";
 import "../styles/journal.css";
 import { auth } from "../config/firebase";
 import { database } from "../config/firebase";
+import ShowGooleMap from "./ShowGoogleMap";
 import {
   getDocs,
   collection,
@@ -30,12 +31,9 @@ function JournalEntries() {
   // GET DIRECTIONS:::
   function getDirectionsForGoogleMaps(id) {
     console.log("id of entry where is clicked photo:", id);
-    // let file = img;
-    // ExifReader.load(file, (exifData) => {
-    //   const { GPSLatitude, GPSLongitude } = exifData.gps;
-    //   console.log(GPSLatitude, GPSLongitude);
-    //   return { GPSLatitude, GPSLongitude };
-    // });
+    let lat = 10.111;
+    let log = 10.111;
+    return <ShowGooleMap lat={lat} log={log} onDoSth={handleDoSth} />;
   }
 
   // SET STATE AND DISPLAY CHANGES (by onSnapshot)::
@@ -49,6 +47,9 @@ function JournalEntries() {
 
     return () => unsubscribe();
   }, []);
+
+  let latitude = 41.222;
+  let longitude = 41.222;
 
   return (
     <div className="jurnal-day-page">
@@ -70,6 +71,7 @@ function JournalEntries() {
           );
         })}
       </ul>
+      <ShowGooleMap latitude={latitude} longitude={longitude} />
       {/* delate below later::::: */}
     </div>
   );

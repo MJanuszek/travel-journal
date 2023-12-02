@@ -17,7 +17,7 @@ function App() {
       <Auth />
       <NewEntry />
       <JournalEntries />
-      <ShowGooleMap />
+      {/* <ShowGooleMap /> */}
     </>
   );
 }

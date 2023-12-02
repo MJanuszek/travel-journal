@@ -2,6 +2,19 @@ import { useState, useEffect } from "react";
 import { addDoc } from "firebase/firestore";
 import { database, auth } from "../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
+// library to analyze photo metadata and retrieve geolocation information:::
+import ExifReader from "exif-js";
+import img from "../assets/IMG_20220710_091504.jpg";
+// GET DIRECTIONS:::
+function getDirectionsForGoogleMaps(id) {
+  console.log("id of entry where is clicked photo:", id);
+  // let file = img;
+  // ExifReader.load(file, (exifData) => {
+  //   const { GPSLatitude, GPSLongitude } = exifData.gps;
+  //   console.log(GPSLatitude, GPSLongitude);
+  //   return { GPSLatitude, GPSLongitude };
+  // });
+}
 
 function NewEnry() {
   const journalEntriesRef = collection(database, "journal-entries");

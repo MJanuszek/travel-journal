@@ -12,7 +12,8 @@ const containerStyle = {
   width: "100%",
   border: "3px solid black",
 };
-function ShowGooleMap() {
+
+const ShowGooleMap = ({ latitude, longitude }) => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: API_KEY,
   });
@@ -28,10 +29,12 @@ function ShowGooleMap() {
     console.log("photo klicked");
     // if <GoogleMap/> component
     if (mapRef.current) {
-      const newPosition = { lat: 53.33333, lng: 12.6444 };
+      const newPosition = { lat: latitude, lng: longitude };
+      // const newPosition = { lat: 51.234, lng: 21.234 };
       setPhotoMarker(newPosition);
     }
   };
+
   return (
     <div className="maps-wrapper">
       <div className="maps-style" style={{ height: "50vh", width: "70vw" }}>
@@ -51,8 +54,9 @@ function ShowGooleMap() {
           {photoMarker && <Marker position={photoMarker} />}
         </GoogleMap>
       </div>
+      {/* <button onClick={addPhotoMarker}>click</button> */}
     </div>
   );
-}
+};
 
 export default ShowGooleMap;
