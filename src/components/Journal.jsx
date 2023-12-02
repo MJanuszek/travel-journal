@@ -71,13 +71,6 @@ function JournalEntries() {
         })}
       </ul>
       {/* delate below later::::: */}
-      <div
-        className="entry-photo"
-        onClick={getDirectionsForGoogleMaps}
-        style={{ backgroundImage: `url(${img})`, backgroundSize: "cover" }}
-      >
-        test photo
-      </div>
     </div>
   );
 }
