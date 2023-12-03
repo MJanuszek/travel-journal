@@ -20,6 +20,7 @@ function JournalEntries() {
   // STATE FOR DIRECTIONA LAT/LOG FOR MAPS::
   const [latitude, setLatitude] = useState(48.141);
   const [longitude, setLongitude] = useState(10.911);
+  const [isClicked, changeClicked] = useState(false);
 
   // DELATE::
   // this function will be passed as props to Entry component:
@@ -42,6 +43,7 @@ function JournalEntries() {
     console.log("xxxxxx", latitude, longitude);
     setLatitude(latitude);
     setLongitude(longitude);
+    changeClicked(true);
   }
 
   // SET STATE AND DISPLAY CHANGES (by onSnapshot)::
@@ -82,6 +84,7 @@ function JournalEntries() {
       </ul>
       <ShowGooleMap
         coordinates={{ latitude: latitude, longitude: longitude }}
+        isClicked={isClicked}
       />
     </div>
   );

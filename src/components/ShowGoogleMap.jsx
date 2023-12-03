@@ -6,7 +6,6 @@ import { API_KEY } from "../constants";
 
 // let photoClicked = img;
 
-const center = { lat: 53.33333, lng: 2.4444 };
 const containerStyle = {
   height: "100%",
   width: "100%",
@@ -14,6 +13,9 @@ const containerStyle = {
 };
 
 const ShowGooleMap = (props) => {
+  const isClicked = props.isClicked;
+  const [zoom, setZoom] = useState(2);
+  const [center, setCenter] = useState({ lat: 53.33333, lng: 2.4444 });
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: API_KEY,
   });
@@ -28,6 +30,13 @@ const ShowGooleMap = (props) => {
         lng: longitude,
       };
       setPhotoMarker(newPosition);
+
+      if (isClicked) {
+        setCenter({ lat: latitude, lng: longitude });
+        setZoom(16);
+      } else {
+        setZoom(2);
+      }
     }
   };
   useEffect(() => {
@@ -48,7 +57,7 @@ const ShowGooleMap = (props) => {
           className="maps-style"
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={3}
+          zoom={zoom}
           options={{
             streetViewControl: false,
             mapTypeControl: false,
