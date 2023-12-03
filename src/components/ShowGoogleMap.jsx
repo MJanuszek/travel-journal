@@ -48,7 +48,7 @@ const ShowGooleMap = (props) => {
           className="maps-style"
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={4}
+          zoom={3}
           options={{
             streetViewControl: false,
             mapTypeControl: false,

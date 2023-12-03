@@ -13,9 +13,13 @@ import {
 } from "firebase/firestore";
 
 function JournalEntries() {
+  // STATE FOR ALL YOURNAL ENTRIES FROM FIREBASE:::
   const [allEntries, setDisplayAll] = useState([]);
   // collection: method that gives references to the collection from firebase
   const journalEntriesRef = collection(database, "journal-entries");
+  // STATE FOR DIRECTIONA LAT/LOG FOR MAPS::
+  const [latitude, setLatitude] = useState(48.141);
+  const [longitude, setLongitude] = useState(10.911);
 
   // DELATE::
   // this function will be passed as props to Entry component:
@@ -26,10 +30,18 @@ function JournalEntries() {
     await deleteDoc(entryDel);
   }
   // GET DIRECTIONS:::
-  function getDirectionsForGoogleMaps(id) {
-    console.log("id of entry where photo is clicked :", id);
-    let latitude = 40.111;
-    let longitude = 30.111;
+  function getDirectionsForGoogleMaps(id, Latitude, Longitude) {
+    console.log(
+      "id of entry where photo is clicked :",
+      id,
+      Latitude,
+      Longitude
+    );
+    let latitude = Latitude;
+    let longitude = Longitude;
+    console.log("xxxxxx", latitude, longitude);
+    setLatitude(latitude);
+    setLongitude(longitude);
   }
 
   // SET STATE AND DISPLAY CHANGES (by onSnapshot)::
@@ -43,9 +55,6 @@ function JournalEntries() {
 
     return () => unsubscribe();
   }, []);
-
-  let latitude = 41.222;
-  let longitude = 41.222;
 
   return (
     <div className="jurnal-day-page">
@@ -61,7 +70,11 @@ function JournalEntries() {
               photo={entry.Photo}
               handleDelete={() => deleteEntry(entry.id)}
               getDirectionsForGoogleMaps={() =>
-                getDirectionsForGoogleMaps(entry.id)
+                getDirectionsForGoogleMaps(
+                  entry.id,
+                  entry.Latitude,
+                  entry.Longitude
+                )
               }
             />
           );
@@ -70,7 +83,6 @@ function JournalEntries() {
       <ShowGooleMap
         coordinates={{ latitude: latitude, longitude: longitude }}
       />
-      {/* delate below later::::: */}
     </div>
   );
 }
