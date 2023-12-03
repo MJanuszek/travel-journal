@@ -1,5 +1,5 @@
 import "../styles/maps.css";
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 // useJsApiLoader = hook from maps
 import { API_KEY } from "../constants";
@@ -13,26 +13,32 @@ const containerStyle = {
   border: "3px solid black",
 };
 
-const ShowGooleMap = ({ latitude, longitude }) => {
+const ShowGooleMap = (props) => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: API_KEY,
   });
-
+  // todo: pass direction (lat and lng) from clicked photo
+  const addPhotoMarker = (props) => {
+    const { latitude, longitude } = props.coordinates;
+    console.log("photo klicked", props, latitude, longitude);
+    // if <GoogleMap/> component
+    if (mapRef.current) {
+      const newPosition = {
+        lat: latitude,
+        lng: longitude,
+      };
+      setPhotoMarker(newPosition);
+    }
+  };
+  useEffect(() => {
+    addPhotoMarker(props);
+  }, [props]);
   const mapRef = useRef(null);
   const [photoMarker, setPhotoMarker] = useState(null);
 
   if (!isLoaded) {
     return <div>loading...</div>;
   }
-  // todo: pass direction (lat and lng) from clicked photo
-  const addPhotoMarker = () => {
-    console.log("photo klicked");
-    // if <GoogleMap/> component
-    if (mapRef.current) {
-      const newPosition = { lat: latitude, lng: longitude };
-      setPhotoMarker(newPosition);
-    }
-  };
 
   return (
     <div className="maps-wrapper">
@@ -53,7 +59,6 @@ const ShowGooleMap = ({ latitude, longitude }) => {
           {photoMarker && <Marker position={photoMarker} />}
         </GoogleMap>
       </div>
-      {/* <button onClick={addPhotoMarker}>click</button> */}
     </div>
   );
 };

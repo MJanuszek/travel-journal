@@ -67,7 +67,9 @@ function JournalEntries() {
           );
         })}
       </ul>
-      <ShowGooleMap latitude={latitude} longitude={longitude} />
+      <ShowGooleMap
+        coordinates={{ latitude: latitude, longitude: longitude }}
+      />
       {/* delate below later::::: */}
     </div>
   );
