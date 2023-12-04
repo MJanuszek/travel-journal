@@ -4,19 +4,34 @@
 // map pin icon copyright: <a href="https://www.flaticon.com/free-icons/maps-and-location" title="maps and location icons">Maps and location icons created by Vector Stall - Flaticon</a>
 
 import "../styles/App.scss";
+import { useState } from "react";
 import JournalEntries from "./Journal";
 import NewEntry from "./NewEntry";
 import Header from "./Header";
-import ShowGooleMap from "./ShowGoogleMap";
-import { Auth } from "./Auth";
 
+import { Auth } from "./Auth";
+// const isLogged = true;
 function App() {
+  const [isLogged, setIsLogged] = useState(false);
+
+  const handleLogin = (value) => {
+    setIsLogged(value);
+  };
   return (
     <div className="container">
       <Header />
-      <Auth />
+      {isLogged ? (
+        <>
+          <NewEntry />
+          <JournalEntries />
+          <Auth onLogin={handleLogin} />
+        </>
+      ) : (
+        <Auth onLogin={handleLogin} />
+      )}
+      {/* <Auth />
       <NewEntry />
-      <JournalEntries />
+      <JournalEntries /> */}
       {/* <ShowGooleMap /> */}
     </div>
   );
