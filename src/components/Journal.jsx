@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Entry from "./Entry";
-import "../styles/journal.css";
+import "../styles/journal.scss";
 import { database } from "../config/firebase";
 import ShowGooleMap from "./ShowGoogleMap";
 import {
@@ -54,11 +54,18 @@ function JournalEntries() {
 
   return (
     <div className="jurnal-day-page">
-      <h3>All memories:</h3>
+      <div className="wrapper">
+        <h3 className="journal-title">All memories:</h3>
+        <ShowGooleMap
+          coordinates={{ latitude: latitude, longitude: longitude }}
+          isClicked={isClicked}
+        />
+      </div>
       <ul>
         {allEntries.map((entry, index) => {
           return (
             <Entry
+              className="single-entry"
               key={index}
               name={entry.Name}
               description={entry.Description}
@@ -72,10 +79,6 @@ function JournalEntries() {
           );
         })}
       </ul>
-      <ShowGooleMap
-        coordinates={{ latitude: latitude, longitude: longitude }}
-        isClicked={isClicked}
-      />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import "../styles/App.scss";
+import "../styles/entry.scss";
 
 function Entry({
   name,
@@ -10,11 +10,6 @@ function Entry({
 }) {
   return (
     <div className="single-entry">
-      <div className="entry">
-        <h3 className="entry-name">{name}</h3>
-        <div className="entry-description">{description}</div>
-        <div className="entry-date">{date}</div>
-      </div>
       <div className="entry-photo" onClick={getDirectionsForGoogleMaps}>
         <img
           src={photo}
@@ -22,9 +17,14 @@ function Entry({
           style={{ maxWidth: "100%", maxHeight: "300px" }}
         />
       </div>
-      <button className="btn" onClick={handleDelete}>
-        Delete this entry
-      </button>
+      <div className="entry">
+        <h3 className="entry-name">{name}</h3>
+        <div className="entry-date">{date}</div>
+        <div className="entry-description">{description}</div>
+        <button className="btn-delate" onClick={handleDelete}>
+          Delete entry
+        </button>
+      </div>
     </div>
   );
 }

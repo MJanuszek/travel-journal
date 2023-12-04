@@ -1,0 +1,27 @@
+@use "sass:color";
+@import "color-palette.scss";
+
+.jurnal-day-page {
+  background-color: darken($main-background, 20%);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 4vh;
+  margin-bottom: 5vh;
+}
+.maps-wrapper {
+  // background-color: darken($accent-color01, 14%);
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.wrapper {
+  padding: 15px;
+  // display: flex;
+  // justify-content: left;
+}
+.journal-title {
+  font-size: 45px;
+  margin: 5px auto;
+  text-shadow: $accent-color01 1px 0 10px;
+  margin: auto;
+}

@@ -1,4 +1,4 @@
-import "../styles/maps.css";
+import "../styles/journal.scss";
 import { useState, useEffect, useRef } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 // useJsApiLoader = hook from maps
@@ -34,7 +34,7 @@ const ShowGooleMap = (props) => {
       if (isClicked) {
         console.log("ssssssd", latitude);
         setCenter({ lat: latitude, lng: longitude });
-        setZoom(16);
+        setZoom(12);
       } else {
         setZoom(2);
       }
@@ -52,7 +52,7 @@ const ShowGooleMap = (props) => {
 
   return (
     <div className="maps-wrapper">
-      <div className="maps-style" style={{ height: "50vh", width: "70vw" }}>
+      <div className="maps-style" style={{ height: "30vh", width: "30vw" }}>
         {/* below GoogleMap component from import */}
         <GoogleMap
           className="maps-style"
