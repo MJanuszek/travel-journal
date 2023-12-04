@@ -32,6 +32,7 @@ const ShowGooleMap = (props) => {
       setPhotoMarker(newPosition);
 
       if (isClicked) {
+        console.log("ssssssd", latitude);
         setCenter({ lat: latitude, lng: longitude });
         setZoom(16);
       } else {

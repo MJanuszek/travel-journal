@@ -3,7 +3,7 @@
 // firebase tutoriaL:  https://www.youtube.com/watch?v=2hR-uWjBAgw
 // map pin icon copyright: <a href="https://www.flaticon.com/free-icons/maps-and-location" title="maps and location icons">Maps and location icons created by Vector Stall - Flaticon</a>
 
-import "../styles/App.css";
+import "../styles/App.scss";
 import JournalEntries from "./Journal";
 import NewEntry from "./NewEntry";
 import Header from "./Header";
@@ -12,13 +12,13 @@ import { Auth } from "./Auth";
 
 function App() {
   return (
-    <>
+    <div className="container">
       <Header />
       <Auth />
       <NewEntry />
       <JournalEntries />
       {/* <ShowGooleMap /> */}
-    </>
+    </div>
   );
 }
 

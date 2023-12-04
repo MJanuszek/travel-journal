@@ -1,4 +1,4 @@
-import "../styles/entry.css";
+import "../styles/App.scss";
 
 function Entry({
   name,

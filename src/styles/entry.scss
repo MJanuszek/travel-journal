@@ -1,7 +1,5 @@
-/* @import "style/color-palette"; */
-* {
-  box-sizing: border-box;
-}
+@use "sass:color";
+@import "color-palette.scss";
 
 .single-entry {
   background-color: --test-block-background05;

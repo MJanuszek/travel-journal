@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Entry from "./Entry";
 import "../styles/journal.css";
-import { auth } from "../config/firebase";
 import { database } from "../config/firebase";
 import ShowGooleMap from "./ShowGoogleMap";
 import {
@@ -20,6 +19,7 @@ function JournalEntries() {
   // STATE FOR DIRECTIONA LAT/LOG FOR MAPS::
   const [latitude, setLatitude] = useState(48.141);
   const [longitude, setLongitude] = useState(10.911);
+  // isClicked is used to change zoom and center in ShowMapcComponent::
   const [isClicked, changeClicked] = useState(false);
 
   // DELATE::
@@ -31,16 +31,10 @@ function JournalEntries() {
     await deleteDoc(entryDel);
   }
   // GET DIRECTIONS:::
-  function getDirectionsForGoogleMaps(id, Latitude, Longitude) {
-    console.log(
-      "id of entry where photo is clicked :",
-      id,
-      Latitude,
-      Longitude
-    );
+  function getDirectionsForGoogleMaps(Latitude, Longitude) {
     let latitude = Latitude;
     let longitude = Longitude;
-    console.log("xxxxxx", latitude, longitude);
+    console.log("lat from journa", latitude);
     setLatitude(latitude);
     setLongitude(longitude);
     changeClicked(true);
@@ -72,11 +66,7 @@ function JournalEntries() {
               photo={entry.Photo}
               handleDelete={() => deleteEntry(entry.id)}
               getDirectionsForGoogleMaps={() =>
-                getDirectionsForGoogleMaps(
-                  entry.id,
-                  entry.Latitude,
-                  entry.Longitude
-                )
+                getDirectionsForGoogleMaps(entry.Latitude, entry.Longitude)
               }
             />
           );

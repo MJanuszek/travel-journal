@@ -1,3 +1,4 @@
+import "../styles/new-entry.scss";
 import { useState, useEffect } from "react";
 import { addDoc } from "firebase/firestore";
 import { database, auth } from "../config/firebase";
@@ -7,10 +8,11 @@ import ExifReader from "exifreader";
 // https://www.npmjs.com/package/exifreader#usage
 
 function NewEnry() {
+  const [EntryVisability, setShowHideAddEntry] = useState("hide");
   const journalEntriesRef = collection(database, "journal-entries");
   const [newEntry, setNewEntry] = useState({
     name: "",
-    date: 0,
+    date: null,
     description: "",
   });
   const [photo, setPhoto] = useState({
@@ -63,10 +65,11 @@ function NewEnry() {
       reader.readAsDataURL(toPhotoConvert);
     }
   }
+
   //
   return (
-    <>
-      <h3>Add new entry to your journal</h3>
+    <div id="addEntry" className="add-entry" onClick={setShowHideAddEntry}>
+      <h3 className="add-entry-title">Add new entry to your journal</h3>
       <form action="">
         <label htmlFor="trip-date"></label>
         <input
@@ -91,6 +94,7 @@ function NewEnry() {
           }}
         />
         <input
+          className="input-textarea"
           type="textarea"
           placeholder="write your memories..."
           onChange={(e) => {
@@ -100,13 +104,15 @@ function NewEnry() {
             }));
           }}
         />
-        <hr />
-        <label htmlFor="trip-photo">Add photo</label>
+        <br />
+        <label className="input-file-label" htmlFor="trip-photo">
+          Add photo (no bigger than 800kB)
+        </label>
+        <br />
         <input
+          className="input-file"
           type="file"
-          name=""
           id="trip-photo"
-          style={{ border: "1px solid black" }}
           onChange={handleChangePhotoToString}
         />
         <hr />
@@ -114,7 +120,7 @@ function NewEnry() {
           Add new memory
         </button>
       </form>
-    </>
+    </div>
   );
 }
 

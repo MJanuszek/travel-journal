@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { useState } from "react";
 
 export function Auth() {
+  let isLogged = false;
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -38,12 +39,15 @@ export function Auth() {
         placeholder="password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="btn" onClick={signIntoJoural}>
-        Enter
-      </button>
-      <button className="btn" onClick={logOut}>
-        Logout
-      </button>
+      {isLogged ? (
+        <button className="btn" onClick={logOut}>
+          Logout
+        </button>
+      ) : (
+        <button className="btn" onClick={signIntoJoural}>
+          LogIn
+        </button>
+      )}
     </div>
   );
 }
