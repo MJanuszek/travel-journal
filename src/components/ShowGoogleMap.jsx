@@ -61,7 +61,7 @@ const ShowGooleMap = (props) => {
 
   return (
     <div className="maps-wrapper">
-      <div className="maps-style" style={{ height: "30vh", width: "30vw" }}>
+      <div className="maps-style" style={{ height: "30vh", width: "70vw" }}>
         {/* below GoogleMap component from import */}
         <GoogleMap
           className="maps-style"

@@ -71,24 +71,25 @@ function JournalEntries() {
         />
       </div>
       <ul>
-        {allEntries
-          .filter((entry) => entry.User === user.uid)
-          .map((entry, index) => {
-            return (
-              <Entry
-                className="single-entry"
-                key={index}
-                name={entry.Name}
-                description={entry.Description}
-                date={entry.Date}
-                photo={entry.Photo}
-                handleDelete={() => deleteEntry(entry.id)}
-                getDirectionsForGoogleMaps={() =>
-                  getDirectionsForGoogleMaps(entry.Latitude, entry.Longitude)
-                }
-              />
-            );
-          })}
+        {user &&
+          allEntries
+            .filter((entry) => entry.User === user.uid)
+            .map((entry, index) => {
+              return (
+                <Entry
+                  className="single-entry"
+                  key={index}
+                  name={entry.Name}
+                  description={entry.Description}
+                  date={entry.Date}
+                  photo={entry.Photo}
+                  handleDelete={() => deleteEntry(entry.id)}
+                  getDirectionsForGoogleMaps={() =>
+                    getDirectionsForGoogleMaps(entry.Latitude, entry.Longitude)
+                  }
+                />
+              );
+            })}
       </ul>
     </div>
   );
