@@ -8,8 +8,8 @@ import { useState, useEffect } from "react";
 
 export function Auth({ onLogin }) {
   let [isLogged, setIsLogged] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (isLogged) {
@@ -31,8 +31,6 @@ export function Auth({ onLogin }) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       setIsLogged(true);
-      console.log(isLogged);
-      // onLogin(isLogged);
     } catch (error) {
       console.log(error);
     }
@@ -43,6 +41,7 @@ export function Auth({ onLogin }) {
       await signOut(auth);
       console.log("logged out of journal");
       setIsLogged(false);
+      console.log("isLogged", isLogged);
     } catch (err) {
       console.error(err);
     }
@@ -62,7 +61,18 @@ export function Auth({ onLogin }) {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      {isLogged ? (
+      <button className="btn" onClick={logOut}>
+        Logout
+      </button>
+
+      <button className="btn" onClick={registerIntoJoural}>
+        Register
+      </button>
+      <button className="btn" onClick={handleLogIn}>
+        LogIn
+      </button>
+
+      {/* {isLogged ? (
         <button className="btn" onClick={logOut}>
           Logout
         </button>
@@ -75,7 +85,7 @@ export function Auth({ onLogin }) {
             LogIn
           </button>
         </>
-      )}
+      )} */}
     </div>
   );
 }

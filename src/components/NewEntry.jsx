@@ -22,7 +22,6 @@ function NewEnry() {
   // check which user is logged:::
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      console.log("authuser", authUser);
       setUser(authUser);
     });
 
@@ -33,7 +32,6 @@ function NewEnry() {
     let photoGPSData = ExifReader.load(file).then((data) => {
       let latitude = data.GPSLatitude.description;
       let longitude = data.GPSLongitude.description;
-      // console.log(latitude, longitude);
       return { latitude, longitude };
     });
     return photoGPSData;
@@ -42,8 +40,6 @@ function NewEnry() {
   async function handleAddNewEntry(e) {
     e.preventDefault();
     let photoGPSData = await getGPSDataFromPhoto(photo.file);
-    // console.log(photoGPSData);
-    // console.log("Identifier", user.uid);
     try {
       await addDoc(journalEntriesRef, {
         Name: newEntry.name,
@@ -54,7 +50,6 @@ function NewEnry() {
         Longitude: photoGPSData.longitude,
         User: user ? user.uid : null,
       });
-      console.log(newEntry.date);
       document.getElementById("trip-date").value = "";
       document.getElementById("name-of-place").value = "";
       document.getElementById("memories").value = "";

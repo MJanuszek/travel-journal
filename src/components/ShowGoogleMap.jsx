@@ -17,11 +17,21 @@ const ShowGooleMap = (props) => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: API_KEY,
   });
-  // todo: pass direction (lat and lng) from clicked photo
+  // SCROLL PAGE TO MAPS:::
+  function scrollToMaps() {
+    //  position of Maps on page
+    const mapElement = mapRef.current.getDiv();
+    const rect = mapElement.getBoundingClientRect();
+    // Scroll to component
+    window.scrollTo({
+      top: window.scrollY + rect.top + (rect.height - window.innerHeight) / 2,
+      behavior: "smooth",
+    });
+  }
+
   const addPhotoMarker = (props) => {
     const { latitude, longitude } = props.coordinates;
-    // console.log("photo klicked", props, latitude, longitude);
-    // if <GoogleMap/> component
+    // if <GoogleMap/> component:::
     if (mapRef.current) {
       const newPosition = {
         lat: latitude,
@@ -35,6 +45,8 @@ const ShowGooleMap = (props) => {
       } else {
         setZoom(2);
       }
+
+      scrollToMaps();
     }
   };
   useEffect(() => {

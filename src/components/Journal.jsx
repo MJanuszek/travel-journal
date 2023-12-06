@@ -26,13 +26,13 @@ function JournalEntries() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       setUser(authUser);
-      console.log("authuser", authUser, "user:", user);
+      // console.log("authuser", authUser, "user:", user);
     });
 
     return () => unsubscribe();
   }, []);
 
-  // DELATE::
+  // DELETE::
   // this function will be passed as props to Entry component:
   async function deleteEntry(id) {
     console.log("id of entry to delete:", id);
@@ -44,7 +44,6 @@ function JournalEntries() {
   function getDirectionsForGoogleMaps(Latitude, Longitude) {
     let latitude = Latitude;
     let longitude = Longitude;
-    console.log("lat from journa", latitude);
     setLatitude(latitude);
     setLongitude(longitude);
     changeClicked(true);

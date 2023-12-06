@@ -7,11 +7,12 @@
   display: flex;
   align-items: left;
   justify-content: left;
-  // flex-wrap: wrap;
   padding: 20px;
   margin-bottom: 4vh;
 }
 .entry {
+  border: 8px double $main-border;
+  padding-right: 20px;
   margin-left: 3vw;
   background-color: darken($main-background, 8%);
   border-radius: 16px;
@@ -25,26 +26,41 @@
 }
 .entry-name {
   font-family: "Ephesis";
-  font-size: 50px;
+  font-size: 45px;
 }
 .entry-date {
-  font-size: 18px;
+  font-size: 22px;
 }
 .entry-description {
-  // border: 3px solid red;
-  // background-color: lighten($main-background, 10%);
+  font-size: 26px;
+  padding: 4px;
   min-height: 10vw;
   min-width: 30vw;
-  max-width: 200px;
-  max-height: 35vh;
+  max-width: 35vw;
+  max-height: 40vh;
   border-radius: 16px;
   overflow: scroll;
-}
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
 
-.entry-photo {
-  // flex-shrink: 0;
-  min-height: 25vh;
-  width: 25vw;
+  &::-webkit-scrollbar-track {
+    background-color: darken($main-background, 8%);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: darken($accent-color03, 12%);
+    border-radius: 2px;
+  }
+  &::-webkit-scrollbar-track-piece {
+    background-color: $main-border;
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: darken($main-background, 8%);
+    border-radius: 2px;
+  }
 }
 
 .btn-delate {
