@@ -32,21 +32,17 @@
 }
 .entry-description {
   // border: 3px solid red;
-  background-color: lighten($main-background, 10%);
-  min-height: 20vw;
+  // background-color: lighten($main-background, 10%);
+  min-height: 10vw;
   min-width: 30vw;
-  max-width: 50%;
+  max-width: 200px;
   max-height: 35vh;
   border-radius: 16px;
   overflow: scroll;
 }
 
 .entry-photo {
-  border: 14px solid white;
-  border-bottom: 60px solid white;
-  border-radius: 16px;
-  background-color: white;
-  flex-shrink: 0;
+  // flex-shrink: 0;
   min-height: 25vh;
   width: 25vw;
 }

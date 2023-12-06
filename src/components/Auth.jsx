@@ -11,7 +11,11 @@ export function Auth({ onLogin }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  useEffect(() => {}, [isLogged]);
+  useEffect(() => {
+    if (isLogged) {
+      onLogin(isLogged);
+    }
+  }, [isLogged, onLogin]);
   //   register
   const registerIntoJoural = async () => {
     // onLogin();
@@ -26,11 +30,9 @@ export function Auth({ onLogin }) {
   const handleLogIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("here logged");
-      setIsLogged(!isLogged);
-
+      setIsLogged(true);
       console.log(isLogged);
-      onLogin(isLogged);
+      // onLogin(isLogged);
     } catch (error) {
       console.log(error);
     }
@@ -40,6 +42,7 @@ export function Auth({ onLogin }) {
     try {
       await signOut(auth);
       console.log("logged out of journal");
+      setIsLogged(false);
     } catch (err) {
       console.error(err);
     }
@@ -58,18 +61,21 @@ export function Auth({ onLogin }) {
         placeholder="password"
         onChange={(e) => setPassword(e.target.value)}
       />
+
       {isLogged ? (
         <button className="btn" onClick={logOut}>
           Logout
         </button>
       ) : (
-        <button className="btn" onClick={registerIntoJoural}>
-          Register
-        </button>
+        <>
+          <button className="btn" onClick={registerIntoJoural}>
+            Register
+          </button>
+          <button className="btn" onClick={handleLogIn}>
+            LogIn
+          </button>
+        </>
       )}
-      <button className="btn" onClick={handleLogIn}>
-        LogIn
-      </button>
     </div>
   );
 }

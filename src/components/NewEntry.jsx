@@ -33,8 +33,8 @@ function NewEnry() {
   async function handleAddNewEntry(e) {
     e.preventDefault();
     let photoGPSData = await getGPSDataFromPhoto(photo.file);
-    console.log(photoGPSData);
-    console.log(newEntry);
+    // console.log(photoGPSData);
+    // console.log(newEntry);
     try {
       await addDoc(journalEntriesRef, {
         Name: newEntry.name,
@@ -46,6 +46,7 @@ function NewEnry() {
 
         // userId: auth?.currentUser?.uid,
       });
+      console.log(newEntry.date);
     } catch (err) {
       console.error(err);
     }
@@ -78,7 +79,7 @@ function NewEnry() {
           onChange={(e) => {
             setNewEntry((prevEntry) => ({
               ...prevEntry,
-              date: Number(e.target.value),
+              date: e.target.value,
             }));
           }}
         />

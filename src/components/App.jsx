@@ -22,9 +22,9 @@ function App() {
       <Header />
       {isLogged ? (
         <>
+          <Auth onLogin={handleLogin} />
           <NewEntry />
           <JournalEntries />
-          <Auth onLogin={handleLogin} />
         </>
       ) : (
         <Auth onLogin={handleLogin} />
