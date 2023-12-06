@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Entry from "./Entry";
 import "../styles/journal.scss";
-import { database } from "../config/firebase";
+import { database, auth } from "../config/firebase";
 import ShowGooleMap from "./ShowGoogleMap";
 import {
   getDocs,
@@ -21,6 +21,16 @@ function JournalEntries() {
   const [longitude, setLongitude] = useState(10.911);
   // isClicked is used to change zoom and center in ShowMapcComponent::
   const [isClicked, changeClicked] = useState(false);
+  // check which user is logged:::
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      setUser(authUser);
+      console.log("authuser", authUser, "user:", user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   // DELATE::
   // this function will be passed as props to Entry component:
@@ -62,22 +72,24 @@ function JournalEntries() {
         />
       </div>
       <ul>
-        {allEntries.map((entry, index) => {
-          return (
-            <Entry
-              className="single-entry"
-              key={index}
-              name={entry.Name}
-              description={entry.Description}
-              date={entry.Date}
-              photo={entry.Photo}
-              handleDelete={() => deleteEntry(entry.id)}
-              getDirectionsForGoogleMaps={() =>
-                getDirectionsForGoogleMaps(entry.Latitude, entry.Longitude)
-              }
-            />
-          );
-        })}
+        {allEntries
+          .filter((entry) => entry.User === user.uid)
+          .map((entry, index) => {
+            return (
+              <Entry
+                className="single-entry"
+                key={index}
+                name={entry.Name}
+                description={entry.Description}
+                date={entry.Date}
+                photo={entry.Photo}
+                handleDelete={() => deleteEntry(entry.id)}
+                getDirectionsForGoogleMaps={() =>
+                  getDirectionsForGoogleMaps(entry.Latitude, entry.Longitude)
+                }
+              />
+            );
+          })}
       </ul>
     </div>
   );

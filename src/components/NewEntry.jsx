@@ -8,7 +8,6 @@ import ExifReader from "exifreader";
 // https://www.npmjs.com/package/exifreader#usage
 
 function NewEnry() {
-  const [EntryVisability, setShowHideAddEntry] = useState("hide");
   const journalEntriesRef = collection(database, "journal-entries");
   const [newEntry, setNewEntry] = useState({
     name: "",
@@ -19,12 +18,22 @@ function NewEnry() {
     file: null,
     base64: "",
   });
+  const [user, setUser] = useState(null);
+  // check which user is logged:::
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      console.log("authuser", authUser);
+      setUser(authUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
   // GET DIRECTIONS:::
   function getGPSDataFromPhoto(file) {
     let photoGPSData = ExifReader.load(file).then((data) => {
       let latitude = data.GPSLatitude.description;
       let longitude = data.GPSLongitude.description;
-      console.log(latitude, longitude);
+      // console.log(latitude, longitude);
       return { latitude, longitude };
     });
     return photoGPSData;
@@ -34,7 +43,7 @@ function NewEnry() {
     e.preventDefault();
     let photoGPSData = await getGPSDataFromPhoto(photo.file);
     // console.log(photoGPSData);
-    // console.log(newEntry);
+    // console.log("Identifier", user.uid);
     try {
       await addDoc(journalEntriesRef, {
         Name: newEntry.name,
@@ -43,8 +52,7 @@ function NewEnry() {
         Photo: photo.base64,
         Latitude: photoGPSData.latitude,
         Longitude: photoGPSData.longitude,
-
-        // userId: auth?.currentUser?.uid,
+        User: user ? user.uid : null,
       });
       console.log(newEntry.date);
     } catch (err) {
@@ -56,20 +64,21 @@ function NewEnry() {
     let toPhotoConvert = e.target.files[0];
     if (toPhotoConvert) {
       const reader = new FileReader();
+      // after file reading...onloaded:
       reader.onloadend = () => {
         setPhoto({
           file: toPhotoConvert,
           base64: reader.result,
         });
       };
-
+      // the file content will be read as base64:::
       reader.readAsDataURL(toPhotoConvert);
     }
   }
 
   //
   return (
-    <div id="addEntry" className="add-entry" onClick={setShowHideAddEntry}>
+    <div id="addEntry" className="add-entry">
       <h3 className="add-entry-title">Add new entry to your journal</h3>
       <form action="">
         <label htmlFor="trip-date"></label>
