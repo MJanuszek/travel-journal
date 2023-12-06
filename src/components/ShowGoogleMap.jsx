@@ -4,8 +4,6 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 // useJsApiLoader = hook from maps
 import { API_KEY } from "../constants";
 
-// let photoClicked = img;
-
 const containerStyle = {
   height: "100%",
   width: "100%",
@@ -22,7 +20,7 @@ const ShowGooleMap = (props) => {
   // todo: pass direction (lat and lng) from clicked photo
   const addPhotoMarker = (props) => {
     const { latitude, longitude } = props.coordinates;
-    console.log("photo klicked", props, latitude, longitude);
+    // console.log("photo klicked", props, latitude, longitude);
     // if <GoogleMap/> component
     if (mapRef.current) {
       const newPosition = {
@@ -32,7 +30,6 @@ const ShowGooleMap = (props) => {
       setPhotoMarker(newPosition);
 
       if (isClicked) {
-        console.log("ssssssd", latitude);
         setCenter({ lat: latitude, lng: longitude });
         setZoom(12);
       } else {

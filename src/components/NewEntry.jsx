@@ -55,6 +55,10 @@ function NewEnry() {
         User: user ? user.uid : null,
       });
       console.log(newEntry.date);
+      document.getElementById("trip-date").value = "";
+      document.getElementById("name-of-place").value = "";
+      document.getElementById("memories").value = "";
+      document.getElementById("trip-photo").value = "";
     } catch (err) {
       console.error(err);
     }
@@ -95,6 +99,7 @@ function NewEnry() {
 
         <input
           type="text"
+          id="name-of-place"
           placeholder="Name of place you visited"
           onChange={(e) => {
             setNewEntry((prevEntry) => ({
@@ -106,6 +111,7 @@ function NewEnry() {
         <input
           className="input-textarea"
           type="textarea"
+          id="memories"
           placeholder="write your memories..."
           onChange={(e) => {
             setNewEntry((prevEntry) => ({
@@ -115,6 +121,7 @@ function NewEnry() {
           }}
         />
         <br />
+
         <label className="input-file-label" htmlFor="trip-photo">
           Add photo (no bigger than 800kB)
         </label>
