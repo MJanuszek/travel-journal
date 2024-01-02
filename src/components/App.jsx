@@ -21,6 +21,7 @@ function App() {
   return (
     <div className="container">
       <Header />
+      <p>To login: email: ania@gmail.com || password: ania01</p>
       {isLogged ? (
         <>
           <Auth onLogin={handleLogin} />
