@@ -1,4 +1,4 @@
-Working version can be open under: 
+Visit site:
 
 https://travel-journal-mjanuszek.netlify.app/
 
